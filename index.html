@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lê Văn Toàn Premium</title>
+    <meta name="description" content="Game enhancement menu interface">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/vue@3.5.13/dist/vue.global.js"></script>
+    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADG0lEQVRYCe1WTWgTQRh9M9mkTWqaNm1jqVWrVkWKiigePHjw4EUEQT2IePAgXjwI4kXw4MWDFw+CB0GKiCAIgqAI/lQ8iKggVms1tTW1SZqmaZLdJLsz4zdJFJNs0iYYezBkmJ35vvfezH7zzcwK+M8a+NcGKF4Pn8/nxQe5G0uNOhR0A6ZpwDR0iJKMWCIJQ0+hrSUMRVEWTc+igBPxOO7cvoXXr15BSaVQKhfhdDohyzKcLhfcbg98Ph/Wrl2HvXv3o6mpqSQJiwAmJyfx5OkTPH/2FMViAZqmQdd1GIYBkqQJkiTB6XTC5XIjEAhg8+YtOHjoMMLhcFkSZQEMDQ3h0YP7mJqagqqqEEURgiDA4XCwnyzLnAQREEURmqYhmUwiHA5j/4GD2LlzV0kSJQEMDw/j7u1bSCQSXK0sy3xDEQK0kXpWRFGApmkQBAGapkPXdaiqipaWFhw7fgLr168vCsIGYGRkBDeuX0M8Huf7SYotFApIp9NQVZUDYUGqWXEch2EYyOfznAh9I5PJoL29HafPnEVHR4cNhA1APB7HlSuXMT4+zp2SIyKQTqeRy+V4yBVF4WoJJIEiEoZhIpfLIZvNcnB0XyaTRW9vL86eO4+mpuYFEDYAk5OTuHjhPMbGxrgzoprUkzq2kQWCNqPQE0gCks/nkUqlUCgUeHhIvWEYaG9vx4WLl9Da2soB8Klp9vDg/j1MTEygUCjwjSgULGQ0kAhELpfj6kk9gSL1BILtRWqpJ/WGYaKrqwsXL11GIBCAaEXx0cMHePv2DXRd42oJgBV6AkDhZ0SIEIWbiBBQAkJ7EYH29nbcvHUbsry8NKvZbBa3bt7A2NgYj7vVExDaiNSzjSz1pN4KP4EgIgSWwBIJIkwkmpubceXqNYRCIR4FPpvNZvDj+3eMjo4iEonA7/dzAEQgl8vxDSn8pJoRYKEn9VZ4WehpHwsEESEwRKy7uwcnTp5CMBjkU7PvhTSZTOLTp4949/YNvn79gnQ6BZfbDa/Xy/8DgQCCwSBisRg2bNiI7u4ebNu+A7FYbB7Ar/k5/7UC/gA+c+QRCE5dXQAAAABJRU5ErkJggg==">
+</head>
+<body class="bg-gray-100">
+    <div id="app" class="min-h-screen">
+        <div class="max-w-lg mx-auto p-4">
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h1 class="text-2xl font-bold text-center mb-6">{{ title }}</h1>
+                <div class="border-t border-gray-200 mb-4"></div>
+                
+                <div v-for="(feature, index) in features" :key="index" 
+                     class="flex justify-between items-center mb-4 p-2 hover:bg-gray-50 rounded">
+                    <span class="text-lg">{{ feature.name }}</span>
+                    <div class="flex items-center">
+                        <button 
+                            class="w-12 h-8 rounded border border-gray-300 flex items-center justify-center"
+                            :class="{ 'bg-green-500 text-white': feature.active }"
+                            @click="toggleFeature(index)">
+                            <span v-if="feature.active">ON</span>
+                            <span v-else>OFF</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        const { createApp, ref } = Vue;
+
+        createApp({
+            setup() {
+                const title = ref('Lê Văn Toàn Premium');
+                const features = ref([
+                    { name: 'TRICK GUN', active: false },
+                    { name: 'TRICK SHOT', active: false },
+                    { name: 'UMP TRICK', active: false },
+                    { name: 'TRICK LOCK', active: false },
+                    { name: 'SHOT BOT', active: false }
+                ]);
+
+                const toggleFeature = (index) => {
+                    features.value[index].active = !features.value[index].active;
+                };
+
+                return {
+                    title,
+                    features,
+                    toggleFeature
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
